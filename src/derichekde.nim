@@ -9,7 +9,7 @@
 ## The original Javascript implementation is here:
 ## https://github.com/uwdata/fast-kde
 
-import std/[math, strformat, algorithm]
+import std/[math, algorithm]
 
 
 type
