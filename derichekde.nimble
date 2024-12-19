@@ -1,7 +1,7 @@
 version     = "0.1.0"
 author      = "Chancy Kennedy"
 description = "Deriche KDE"
-license     = "MIT"
+license     = "BSD-3-Clause"
 
 srcDir = "src"
 
