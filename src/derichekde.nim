@@ -279,13 +279,3 @@ proc density_1d*(
 
   deriche_conv_1d(config, grid, bins, 1, y_causal, y_anticausal, h, d)
   return (d, lo, hi)
-
-
-when isMainModule:
-  # Example usage of density1d
-  var data = @[1.2, 2.3, 23, 40, 50, 60, 70, 60, 50, 400, 700, 1000]
-  let (density, lo, hi) = density_1d(data, extent=(0.0, 1000.0), bandwidth=2.0)
-
-  echo "Density estimation results:"
-  echo fmt"Range: [{lo:.2f}, {hi:.2f}]"
-  echo fmt"Density: {density}"
