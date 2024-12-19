@@ -143,9 +143,9 @@ proc deriche_init_zero_pad*(
   var cur = src[off]
   var sum_val = sum_value
   let max_iter = int(ceil(sigma * 10.0))
-  for n in 0..<max_iter:
-    for m in 0..<q:
-      dest[m] += h[m]*cur
+  for n in 0 ..< max_iter:
+    for m in 0 ..< q:
+      dest[m] += h[m] * cur
 
     sum_val -= abs(h[0])
     if sum_val <= tol:
@@ -154,15 +154,15 @@ proc deriche_init_zero_pad*(
     # Compute next impulse tap h_{n+q}
     var next_h = if n+q <= p: b[n+q] else: 0.0
     for m in 1..q:
-      next_h -= a[m]*h[q - m]
+      next_h -= a[m] * h[q - m]
 
     # Shift h array
-    for m in 0..<q-1:
+    for m in 0 ..< q-1:
       h[m] = h[m+1]
     h[q-1] = next_h
 
 
-proc deriche_conv1d*(
+proc deriche_conv_1d*(
   c: DericheConfig,
   src: openArray[float],
   N: int, stride: int,
@@ -233,8 +233,7 @@ proc deriche_conv1d*(
       i += stride
 
 
-# Default parameters chosen to match Python defaults
-proc density1d*(
+proc density_1d*(
   data: var openArray[float],
   extent: tuple[lo: float, hi: float] = (0.0, 0.0),
   weight: seq[float] = @[],
@@ -260,7 +259,7 @@ proc density1d*(
 
   var lo, hi: float
   if extent.lo == 0.0 and extent.hi == 0.0:
-    let (elo, ehi) = density_extent(data, float(pad)*bw)
+    let (elo, ehi) = density_extent(data, float(pad) * bw)
     lo = elo
     hi = ehi
   else:
@@ -278,16 +277,15 @@ proc density1d*(
   var h = newSeq[float](5)
   var d = newSeq[float](bins)
 
-  deriche_conv1d(config, grid, bins, 1, y_causal, y_anticausal, h, d)
+  deriche_conv_1d(config, grid, bins, 1, y_causal, y_anticausal, h, d)
   return (d, lo, hi)
 
 
 when isMainModule:
   # Example usage of density1d
-  var data = @[1.2, 2.3, 2.5, 3.1, 3.2, 3.8, 4.1, 4.5, 4.7, 5.1]
-  let (density, lo, hi) = density1d(data)
+  var data = @[1.2, 2.3, 23, 40, 50, 60, 70, 60, 50, 400, 700, 1000]
+  let (density, lo, hi) = density_1d(data, extent=(0.0, 1000.0), bandwidth=2.0)
 
   echo "Density estimation results:"
   echo fmt"Range: [{lo:.2f}, {hi:.2f}]"
-  echo fmt"First few density values: {density[0..4]}"
-
+  echo fmt"Density: {density}"
