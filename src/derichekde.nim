@@ -241,7 +241,7 @@ proc density_1d*(
   adjust: float = 1.0,
   pad: int = 3,
   bins: int = 512
-): (seq[float], float, float) =
+): tuple[density: seq[float], lo: float, hi: float] =
 
   var w: seq[float]
   if weight.len == 0:
@@ -265,7 +265,7 @@ proc density_1d*(
   else:
     (lo, hi) = extent
 
-  let grid = bin1d(data, w, lo, hi, bins)
+  let grid = bin_1d(data, w, lo, hi, bins)
   let delta = (hi - lo) / float(bins - 1)
   let neg = has_negative(grid)
 

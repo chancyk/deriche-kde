@@ -57,7 +57,7 @@ proc nrd*(data: var openArray[float]): float =
   return 1.06 * v * pow(n, -0.2)
 
 
-proc bin1d*(
+proc bin_1d*(
   data: openArray[float], weight: openArray[float],
   lo: float, hi: float, n: int
 ): seq[float] =
