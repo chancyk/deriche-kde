@@ -9,6 +9,23 @@ The naive KDE algorithm is O(n^2), while this implementation is O(n+m) wherem is
 number of bins.
 
 
+# Usage
+
+```nim
+import derichekde
+
+var data = @[1.2, 2.3, 23, 40, 50, 60, 70, 60, 50, 400, 700, 1000]
+let (densities, lo, hi) = density_1d(data)
+
+# The default bin size is 512, pass bins to change.
+doAssert densities.len == 512
+```
+
+`lo` and `hi` are the minimum and maximum values in the data with a padding if `extent` is not provided.
+
+Pass `bandwidth` to change the smoothness of the curve.
+
+
 # References
 
 This code is a port of this Python implementation of the Deriche approximation KDE algorithm found here:
