@@ -25,9 +25,11 @@ type
     sum_anticausal*: float
 
 
-proc deriche_causal_coeff*(a_out: var array[0..4, float],
-                           b_out: var array[0..3, float],
-                           sigma: float) =
+proc deriche_causal_coeff*(
+  a_out: var array[0..4, float],
+  b_out: var array[0..3, float],
+  sigma: float
+) =
   let K = 4
 
   # Coefficients from Getreuer's implementation
