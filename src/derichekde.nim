@@ -1,7 +1,17 @@
+## Deriche KDE
+##
+## This code is a port of this implementation of the Deriche approximation KDE algorithm found here:
+## https://github.com/liuzh-buaa/fast_kde
+##
+## Which is itself a port of Javascript implementation... which was the implementation of a paper
+## that was based on a port of the Deriche computer vision kernel implemented in C by Getreuer.
+##
+## The original Javascript implementation is here:
+## https://github.com/uwdata/fast-kde
+
 import std/[math, strformat]
 
 import derichekde/common
-
 
 
 type
